@@ -20,6 +20,7 @@
                                         </v-col>
                                         </v-row>
                                         </v-container>
+                                        <v-btn @click=submitToAPI>質問文生成</v-btn>
                                         <v-card>Hi</v-card>
 </v-app>
 
@@ -33,7 +34,12 @@ export default {
   data:() => ({
         category: "エラ",
         categories:['エラー','ネットワークエラ-']
-     })
+     }),
+   methods:{
+        submitToAPI(){
+            console.log("api")
+        }
+   }
 }
 </script>
 
