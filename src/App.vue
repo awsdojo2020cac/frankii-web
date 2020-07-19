@@ -1,7 +1,14 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <input v-model="category">
+    <v-overflow-btn
+                                          class="my-2"
+                                          :items="categories"
+                                          label="Segmented Btn"
+                                          segmented
+                                        ></v-overflow-btn>
+    <p>Message is: </p>
   </div>
 </template>
 
@@ -12,6 +19,12 @@ export default {
   name: 'App',
   components: {
     HelloWorld
+  },
+  data:function(){
+    return{
+        category: "エラー",
+        categories:[{text:"エラー"},{text:"task"}]
+    }
   }
 }
 </script>
