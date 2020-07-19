@@ -1,31 +1,39 @@
 <template>
+
   <div id="app">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-    <input v-model="category">
-    <v-overflow-btn
-                                          class="my-2"
-                                          :items="categories"
-                                          label="Segmented Btn"
-                                          segmented
-                                        ></v-overflow-btn>
-    <p>Message is: </p>
+  <v-app>
+      <h1>Frankii</h1>
+    <v-container fluid width="700">
+    質問文生成
+
+    <v-row align="center">
+    <v-col cols=2>
+    <v-select
+     class="my-2"
+          :items = "categories"
+             label="カテゴリ"
+                                          filled dense
+                                        ></v-select>
+                                           <v-col cols=2>
+                                            <v-text-field v-model="category"></v-text-field>
+                                            </v-col>
+                                        </v-col>
+                                        </v-row>
+                                        </v-container>
+                                        <v-card>Hi</v-card>
+</v-app>
+
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  },
-  data:function(){
-    return{
-        category: "エラー",
-        categories:[{text:"エラー"},{text:"task"}]
-    }
-  }
+  data:() => ({
+        category: "エラ",
+        categories:['エラー','ネットワークエラ-']
+     })
 }
 </script>
 
@@ -36,6 +44,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 30px;
 }
 </style>
