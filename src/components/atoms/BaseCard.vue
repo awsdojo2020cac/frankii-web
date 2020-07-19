@@ -1,5 +1,5 @@
 <template>
-    <v-card class="px-4 pt-2 scroll overflow-y-auto" outlined>
+    <v-card class="px-4 pt-2 scroll overflow-y-auto" outlined height="450">
         <v-row no-gutters>
             <div class="card-title pt-3 pb-3 pl-2"> {{title}}</div>
         </v-row>

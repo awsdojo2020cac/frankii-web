@@ -9,7 +9,7 @@
         name: "BaseSearchButton",
         props: {
             text: String,
-            url: String
+            googleUrl: String
         }
     }
 </script>
