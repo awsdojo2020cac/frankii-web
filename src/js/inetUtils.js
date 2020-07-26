@@ -1,7 +1,7 @@
 import axios from "axios";
 
-function getJson(url) {
-    return axios.get(url).then(response => {
+function getJson(url, req) {
+    return axios.get(url, req).then(response => {
         return response;
     }).catch(error => {
         return error;

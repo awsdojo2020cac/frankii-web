@@ -1,15 +1,17 @@
 <template>
     <BaseCard title="Search">
-        <v-row>
-            <BaseSearchButton :url=googleUrl text="Search on Google"></BaseSearchButton>
-        </v-row>
-        <v-row>
-            <BaseSearchButton :url=qiitaURL text="qiitaで検索"></BaseSearchButton>
-        </v-row>
-        <v-row>
-            <BaseSearchButton :url=awsURL
-                              text="AWSの公式ドキュメンテーション"></BaseSearchButton>
-        </v-row>
+        <v-container>
+            <v-row>
+                <BaseSearchButton :url=googleUrl text="Search on Google"></BaseSearchButton>
+            </v-row>
+            <v-row>
+                <BaseSearchButton :url=qiitaURL text="qiitaで検索"></BaseSearchButton>
+            </v-row>
+            <v-row>
+                <BaseSearchButton :url=awsURL
+                                  text="AWSの公式ドキュメンテーション"></BaseSearchButton>
+            </v-row>
+        </v-container>
     </BaseCard>
 </template>
 

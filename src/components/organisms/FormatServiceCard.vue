@@ -1,5 +1,5 @@
 <template>
-    <BaseCard title="質問文生成">
+    <BaseCard title="質問文生成" id="format-service-card">
         <v-container>
             <v-row>
                 <v-col cols=6>
@@ -19,7 +19,7 @@
                 </v-col>
 
                 <v-col cols="6">
-                    <div>{{finishedQuestionText}}</div>
+                    <div class="pre-formatted">{{finishedQuestionText}}</div>
                 </v-col>
             </v-row>
         </v-container>
@@ -36,15 +36,22 @@
         data: () => ({
             category: "エラ",
             categories: ['エラー', 'ネットワークエラ-'],
+            input: {
+                "task": "「サーバーメンテ(tkt. 1234)」",
+                "genre": "バックエンド",
+                "errorContent": "（事象）",
+                "errorMsg": "（エラーメッセージ）"
+            }
+            ,
             frankiiQuestions: {},
             finishedQuestionText: ""
         }),
         methods: {
             submitToAPI() {
-                inet.formatQuestionText({}).then(res => this.finishedQuestionText = res.data.body);
+                inet.formatQuestionText(this.input).then(res => this.finishedQuestionText = res.data.body);
             },
             getFrankiiQuestions() {
-                inet.getFrankiiQuestions().then(res => this.frankiiQuestions = res.data.body);
+                inet.getFrankiiQuestions({"category":"error"}).then(res => this.frankiiQuestions = res.data.body);
             }
         },
         mounted() {
@@ -54,5 +61,11 @@
 </script>
 
 <style scoped>
+    .pre-formatted {
+        white-space: pre;
+    }
 
+    #format-service-card{
+        text-align: left;
+    }
 </style>
