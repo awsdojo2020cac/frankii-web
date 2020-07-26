@@ -8,9 +8,19 @@ function getJson(url) {
     });
 }
 
+function postJson(url, req) {
+    return axios.post(url, req)
+        .then(response => {
+            return response;
+        }).catch(error => {
+        return error;
+    });
+}
+
 
 const inetUtils = {
-    getJson
+    getJson,
+    postJson
 };
 
 export default inetUtils;
