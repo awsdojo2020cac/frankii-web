@@ -2,7 +2,7 @@ import inetUtils from "./inetUtils";
 
 
 function getFrankiiQuestions(req) {
-    return inetUtils.getJson("https://3bglwwbrx3.execute-api.ap-northeast-1.amazonaws.com/prod/frankiis-questions",req);
+    return inetUtils.getJson("https://3bglwwbrx3.execute-api.ap-northeast-1.amazonaws.com/prod/frankiis-questions", req);
 }
 
 function formatQuestionText(req) {
@@ -12,7 +12,6 @@ function formatQuestionText(req) {
 const inet = {
     getFrankiiQuestions,
     formatQuestionText
-
 };
 
 export default inet;

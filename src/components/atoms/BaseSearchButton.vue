@@ -1,5 +1,5 @@
 <template>
-    <v-btn :href=url target="_blank">
+    <v-btn class="my-2" :href=url target="_blank">
         {{text}}
     </v-btn>
 </template>

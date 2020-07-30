@@ -4,6 +4,7 @@
             <v-row>
                 <v-col cols=6>
                     <v-select
+                            style="text-align:left"
                             class="my-2"
                             :items="categories"
                             label="カテゴリ"
@@ -19,7 +20,9 @@
                 </v-col>
 
                 <v-col cols="6">
-                    <div class="pre-formatted">{{finishedQuestionText}}</div>
+                    <div class="pre-formatted">{{formattedText}}</div>
+                    <br>
+                    <v-btn v-if="formattedTextExists" v-clipboard="formattedText">COPY</v-btn>
                 </v-col>
             </v-row>
         </v-container>
@@ -35,7 +38,8 @@
         components: {BaseCard},
         data: () => ({
             category: "エラ",
-            categories: ['エラー', 'ネットワークエラ-'],
+            categories: ['アプリ開発でエラーが出た', 'クラウド上でNWエラーが出た',
+                'ファイルの場所がわからない', ' アプリ実装方法がわからない'],
             input: {
                 "task": "「サーバーメンテ(tkt. 1234)」",
                 "genre": "バックエンド",
@@ -44,18 +48,23 @@
             }
             ,
             frankiiQuestions: {},
-            finishedQuestionText: ""
+            formattedText: ""
         }),
         methods: {
             submitToAPI() {
-                inet.formatQuestionText(this.input).then(res => this.finishedQuestionText = res.data.body);
+                inet.formatQuestionText(this.input).then(res => this.formattedText = res.data.body);
             },
             getFrankiiQuestions() {
-                inet.getFrankiiQuestions({"category":"error"}).then(res => this.frankiiQuestions = res.data.body);
+                inet.getFrankiiQuestions({"category": "error"}).then(res => this.frankiiQuestions = res.data.body);
             }
         },
         mounted() {
 
+        },
+        computed: {
+            formattedTextExists() {
+                return this.formattedText !== undefined && this.formattedText !== "";
+            }
         }
     }
 </script>
@@ -65,7 +74,7 @@
         white-space: pre;
     }
 
-    #format-service-card{
+    #format-service-card {
         text-align: left;
     }
 </style>

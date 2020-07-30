@@ -11,6 +11,7 @@
                 <BaseSearchButton :url=awsURL
                                   text="AWSの公式ドキュメンテーション"></BaseSearchButton>
             </v-row>
+<!--            //todo 何キーワードでどこ(google, qiita)で検索したのかがわかる。-->
         </v-container>
     </BaseCard>
 </template>
