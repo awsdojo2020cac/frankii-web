@@ -6,13 +6,15 @@
                     <v-select
                             style="text-align:left"
                             class="my-2"
+                            @change="getFrankiiQuestions"
                             :items="categories"
                             label="カテゴリ"
                             filled dense
                     ></v-select>
                     <template v-for="(question, key) in frankiiQuestions">
                         {{question}}
-                        <v-text-field :key="key"></v-text-field>
+                        <v-text-field v-if="!isKeyTextAreaField(key)" v-model=input[key] :key="key"></v-text-field>
+                        <v-textarea outlined v-if="isKeyTextAreaField(key)" v-model=input[key] :key="key"></v-textarea>
                     </template>
                     <v-btn @click=getFrankiiQuestions>質問文取得</v-btn>
                     <v-btn @click=submitToAPI>質問文生成</v-btn>&nbsp;
@@ -41,10 +43,11 @@
             categories: ['アプリ開発でエラーが出た', 'クラウド上でNWエラーが出た',
                 'ファイルの場所がわからない', ' アプリ実装方法がわからない'],
             input: {
-                "task": "「サーバーメンテ(tkt. 1234)」",
+                "task": "[#123 サーバーメンテ]",
                 "genre": "バックエンド",
-                "errorContent": "（事象）",
-                "errorMsg": "（エラーメッセージ）"
+                "errorContent": "Hello WorldはHi Worldと認識されない",
+                "errorMsg": "if \"Hello World\" == \"Hi World\":\n" +
+                    "    print(\"Hello World\")"
             }
             ,
             frankiiQuestions: {},
@@ -56,6 +59,9 @@
             },
             getFrankiiQuestions() {
                 inet.getFrankiiQuestions({"category": "error"}).then(res => this.frankiiQuestions = res.data.body);
+            },
+            isKeyTextAreaField(key) {
+                return key === "errorMsg";
             }
         },
         mounted() {
