@@ -1,8 +1,14 @@
 import inetUtils from "./inetUtils";
 
+//temporarily using api gateway hard code urls
+const FRANKII_BACKEND_ENDPOINT = "https://gd3f5l1jvi.execute-api.ap-northeast-1.amazonaws.com/dev";
 
-function getFrankiiQuestions(req) {
-    return inetUtils.getJson("https://3bglwwbrx3.execute-api.ap-northeast-1.amazonaws.com/prod/frankiis-questions", req);
+function getFrankiiQuestionCategories() {
+    return inetUtils.get(FRANKII_BACKEND_ENDPOINT + "/user/question-categories");
+}
+
+function getInputTemplate(category) {
+    return inetUtils.get(FRANKII_BACKEND_ENDPOINT + "/user/input-template/" + category);
 }
 
 function formatQuestionText(req) {
@@ -10,7 +16,8 @@ function formatQuestionText(req) {
 }
 
 const inet = {
-    getFrankiiQuestions,
+    getFrankiiQuestionCategories,
+    getInputTemplate,
     formatQuestionText
 };
 

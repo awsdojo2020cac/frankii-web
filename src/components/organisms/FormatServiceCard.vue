@@ -6,17 +6,18 @@
                     <v-select
                             style="text-align:left"
                             class="my-2"
-                            @change="getFrankiiQuestions"
+                            @change="getInputTemplate"
                             :items="categories"
+                            item-text="displayText"
+                            item-value="category"
                             label="カテゴリ"
                             filled dense
                     ></v-select>
-                    <template v-for="(question, key) in frankiiQuestions">
+                    <template v-for="(question, key) in inputTemplate">
                         {{question}}
                         <v-text-field v-if="!isKeyTextAreaField(key)" v-model=input[key] :key="key"></v-text-field>
                         <v-textarea outlined v-if="isKeyTextAreaField(key)" v-model=input[key] :key="key"></v-textarea>
                     </template>
-                    <v-btn @click=getFrankiiQuestions>質問文取得</v-btn>
                     <v-btn @click=submitToAPI>質問文生成</v-btn>&nbsp;
                     <v-btn>Clear All</v-btn>
                 </v-col>
@@ -39,33 +40,33 @@
         name: "FormatServiceCard",
         components: {BaseCard},
         data: () => ({
-            category: "エラ",
-            categories: ['アプリ開発でエラーが出た', 'クラウド上でNWエラーが出た',
-                'ファイルの場所がわからない', ' アプリ実装方法がわからない'],
+            categories: [],
             input: {
                 "task": "[#123 サーバーメンテ]",
                 "genre": "バックエンド",
                 "errorContent": "Hello WorldはHi Worldと認識されない",
                 "errorMsg": "if \"Hello World\" == \"Hi World\":\n" +
                     "    print(\"Hello World\")"
-            }
-            ,
-            frankiiQuestions: {},
+            },
+            inputTemplate: {},
             formattedText: ""
         }),
         methods: {
+            initialize() {
+                inet.getFrankiiQuestionCategories().then(res => this.categories = res.data);
+            },
             submitToAPI() {
                 inet.formatQuestionText(this.input).then(res => this.formattedText = res.data.body);
             },
-            getFrankiiQuestions() {
-                inet.getFrankiiQuestions({"category": "error"}).then(res => this.frankiiQuestions = res.data.body);
+            getInputTemplate(category) {
+                inet.getInputTemplate(category).then(res => this.inputTemplate = res.data.blocks);
             },
             isKeyTextAreaField(key) {
                 return key === "errorMsg";
             }
         },
         mounted() {
-
+            this.initialize();
         },
         computed: {
             formattedTextExists() {
