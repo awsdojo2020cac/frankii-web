@@ -13,10 +13,12 @@
                             label="カテゴリ"
                             filled dense
                     ></v-select>
-                    <template v-for="(question, key) in inputTemplate">
-                        {{question}}
-                        <v-text-field v-if="!isKeyTextAreaField(key)" v-model=input[key] :key="key"></v-text-field>
-                        <v-textarea outlined v-if="isKeyTextAreaField(key)" v-model=input[key] :key="key"></v-textarea>
+                    <template v-for="block in inputTemplate">
+                        {{block.label}}
+                        <v-text-field v-if="!isMultiLine(block.multiline)" v-model=input[block.key]
+                                      :key="block.key"></v-text-field>
+                        <v-textarea outlined v-if="isMultiLine(block.multiline)" v-model=input[block.key]
+                                    :key="block.key"></v-textarea>
                     </template>
                     <v-btn @click=submitToAPI>質問文生成</v-btn>&nbsp;
                     <v-btn>Clear All</v-btn>
@@ -40,14 +42,9 @@
         name: "FormatServiceCard",
         components: {BaseCard},
         data: () => ({
+            theCategory: "",
             categories: [],
-            input: {
-                "task": "[#123 サーバーメンテ]",
-                "genre": "バックエンド",
-                "errorContent": "Hello WorldはHi Worldと認識されない",
-                "errorMsg": "if \"Hello World\" == \"Hi World\":\n" +
-                    "    print(\"Hello World\")"
-            },
+            input: {},
             inputTemplate: {},
             formattedText: ""
         }),
@@ -56,13 +53,20 @@
                 inet.getFrankiiQuestionCategories().then(res => this.categories = res.data);
             },
             submitToAPI() {
-                inet.formatQuestionText(this.input).then(res => this.formattedText = res.data.body);
+                const req = {
+                    category: this.theCategory,
+                    input: this.input
+                };
+                inet.formatQuestionText(req).then(res => {
+                    this.formattedText = res.data
+                });
             },
             getInputTemplate(category) {
+                this.theCategory = category;
                 inet.getInputTemplate(category).then(res => this.inputTemplate = res.data.blocks);
             },
-            isKeyTextAreaField(key) {
-                return key === "errorMsg";
+            isMultiLine(multiline) {
+                return multiline;
             }
         },
         mounted() {
