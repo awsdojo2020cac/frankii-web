@@ -7,14 +7,14 @@ The website interface for "Frankii"
  
 When communicating in Japanese through text messages, it is sometimes time-costly for one to find and pick the right Keigo, fix grammar mistakes, 
 and pretty format the question for the other party to understand it clearly etc. 
-Sometimes these actions take away our precious time, preventing us from focusing on solving the actual issues at hand. 
+Sometimes these actions take away our time, preventing us from focusing on solving the actual issues at hand. 
  "Frankii" wishes to alleviate this by abstracting away the stress of formatting and perfecting our text messages manually.
  
  In Frankii, you select the category of question you want to ask your teammate, type in the core content of your question in a few text fields,
  and frankii will generate a nicely formatted text you can paste and send. 
  For now, Frankii's target user group is engineers that send technical questions to their teammates during everyday work.    
      
- Frankii's Live Website: http://frankii-website.s3-website-ap-northeast-1.amazonaws.com/ <br /> 
+ Frankii's Live Website: https://awsdojo2020cac.github.io/frankii-web/ <br /> 
  Frankii's Slack App: In development, working model exists. Contact us for more info. 
 
 ## PR 
@@ -43,11 +43,7 @@ npm run serve
 ```
 
 ### Build and deploy 
-```
-npm run build
-npm run deploy
-```
-Note: Valid `aws configure` credentials must be set on your machine.  
+Currently automatic build and deployments trigger on any pushes (github actions) 
 
 ## Todos
 * Continue to develop backend according to Frankii's OpenAPI specification @jonkenobi
