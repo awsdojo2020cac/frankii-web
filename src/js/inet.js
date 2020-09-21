@@ -1,7 +1,7 @@
 import inetUtils from "./inetUtils";
 
 //temporarily using api gateway hard code urls
-const FRANKII_BACKEND_ENDPOINT = "https://5ib1ab2cr9.execute-api.ap-northeast-1.amazonaws.com/dev";
+const FRANKII_BACKEND_ENDPOINT = "https://34sxiz6980.execute-api.ap-northeast-1.amazonaws.com/dev";
 
 function getFrankiiQuestionCategories() {
     return inetUtils.get(FRANKII_BACKEND_ENDPOINT + "/user/question-categories");

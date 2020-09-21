@@ -15,8 +15,10 @@
                     ></v-select>
                     <template v-for="block in inputTemplate">
                         {{block.label}}
-                        <v-text-field v-if="!isMultiLine(block.multiline)" v-model=input[block.key]
-                                      :key="block.key"></v-text-field>
+                        <v-text-field v-if="!isMultiLine(block.multiline)"
+                                      v-model=input[block.key]
+                                      :key="block.key"
+                                      solo dense/>
                         <v-textarea outlined v-if="isMultiLine(block.multiline)" v-model=input[block.key]
                                     :key="block.key"></v-textarea>
                     </template>
